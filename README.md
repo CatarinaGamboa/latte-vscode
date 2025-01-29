@@ -5,7 +5,7 @@ Use our Latte type checker to annotate your programs with permissions where alia
 
 Research Paper [details](https://arxiv.org/pdf/2309.05637).
 
-![Latte Extension Demo](./figs/recording2.gif)
+![Latte Extension Demo](./figs/Latte_video.gif)
 
 ## Features
 
