@@ -1,0 +1,98 @@
+{
+  "name": "latte",
+  "displayName": "LatteExtension",
+  "description": "Verify uniqueness in your java classes",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "languages": [
+		{
+			"id": "java"
+		}
+	],
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+		"java",
+		"test",
+		"junit",
+		"testng",
+		"debug"
+	],
+  "activationEvents": [
+    "onLanguage:java"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+        {
+            "id": "java",
+            "extensions": [".java"],
+            "aliases": ["Java"]
+        }
+    ],
+    "configuration": {
+			"type": "object",
+			"title": "Latte configuration",
+			"properties": {
+				"latte.maxNumberOfProblems": {
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				},
+				"latte.trace.server": {
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VSCode and the liquidJavaServer service."
+				}
+			}
+    }
+  },
+  "views": {
+    "explorer": [
+      {
+        "id": "relatedFiles",
+        "name": "Related Files",
+        "when": "resourceLangId == java"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "command": "extension.showRelatedFiles",
+      "title": "Show Related Files"
+    }
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+	"devDependencies": {
+		"@types/mkdirp": "^0.5.2",
+		"@types/node": "^12.12.0",
+		"@types/rimraf": "^2.0.2",
+		"@types/vscode": "^1.45.0",
+		"@typescript-eslint/eslint-plugin": "^4.16.0",
+		"@typescript-eslint/parser": "^4.16.0",
+		"eslint": "^7.21.0",
+		"typescript": "^4.2.2"
+	},
+	"dependencies": {
+		"ftp": "^0.3.10",
+		"get-port": "^5.1.1",
+		"jsonc-parser": "^0.4.2",
+		"minimist": "^1.2.7",
+		"mkdirp": "^0.5.1",
+		"rimraf": "^2.6.2",
+		"vscode-languageclient": "^3.1.0"
+	}
+
+}

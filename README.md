@@ -1,10 +1,17 @@
 # latte-vscode
 ## VSCode extension for Latte - Lightweight Aliasing Tracking for Java
-Paper [details](https://arxiv.org/pdf/2309.05637)
 
-Use our Latte type checker to annotate your programs with permissions related to uniqueness properties where aliases are tracked!
+Use our Latte type checker to annotate your programs with permissions where aliases are tracked!
 
-### Annotations
+Research Paper [details](https://arxiv.org/pdf/2309.05637).
+
+## Features
+
+This extension type checks files using Latte.
+
+Latte uses annotations to specify the permissions of fields and parameters to track their uniqueness properties and the aliases that are created throughout the program.
+
+#### Quick introduction to Latte
 We have 4 annotations, some for parameters, others for fields. Local variables are not annotated.
 - For parameters:
   - `@Free` for parameters that are globally unique. When a caller passes an argument to a `@Free` parameter they cannot observe that value again.
@@ -15,7 +22,7 @@ We have 4 annotations, some for parameters, others for fields. Local variables a
   - `@Shared` for parameters or fields that can be shared, so they have no uniqueness 
 
 
-### Example
+#### Example
 Here is an example of Java classes using Latte.
 
 ```java
@@ -54,4 +61,32 @@ public class MyStack {
 }
 ```
 
+With this extension you can check in real time if your code follows the rules from latte.
 
+![Latte Extension Demo](./figs/recording2.gif)
+
+
+## Requirements
+
+To use Latte, your project should have the latte.jar in its dependencies and the files need to import the specifications (e.g., import specification.Free).
+
+## Known Issues
+
+The programs that can be verified using Latte are still simple, we are adding new features going forward.
+
+Known issues include:
+- Not supporting ifs without elses
+- Not verifying aliases related to while loops
+- ...
+
+## Release Notes
+
+
+### 1.0.0
+
+Initial release of Latte
+
+
+---
+
+**Enjoy!**
