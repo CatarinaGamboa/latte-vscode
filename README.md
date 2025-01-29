@@ -1,5 +1,6 @@
 # latte-vscode
-VSCode extension for Latte - Lightweight Aliasing Tracking for Java
+## VSCode extension for Latte - Lightweight Aliasing Tracking for Java
+Paper [details](https://arxiv.org/pdf/2309.05637)
 
 Use our Latte type checker to annotate your programs with permissions related to uniqueness properties where aliases are tracked!
 
