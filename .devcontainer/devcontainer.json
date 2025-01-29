@@ -1,0 +1,13 @@
+{
+    "name": "Latte Extension Dev",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "/workspaces/$(basename ${GITHUB_REPOSITORY})/.devcontainer/latte-0.0.1.vsix"
+        ]
+      }
+    },
+    "postCreateCommand": "code --install-extension .devcontainer/latte-vscode.vsix && npm install"
+}
+  
