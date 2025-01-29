@@ -5,6 +5,8 @@ Use our Latte type checker to annotate your programs with permissions where alia
 
 Research Paper [details](https://arxiv.org/pdf/2309.05637).
 
+![Latte Extension Demo](./figs/recording2.gif)
+
 ## Features
 
 This extension type checks files using Latte.
@@ -23,7 +25,7 @@ We have 4 annotations, some for parameters, others for fields. Local variables a
 
 
 #### Example
-Here is an example of Java classes using Latte.
+Here is an example of Java classes using the annotations with comments explaining the different steps of type checking of the permissions in relation to aliasing.
 
 ```java
 class Node {
@@ -63,7 +65,7 @@ public class MyStack {
 
 With this extension you can check in real time if your code follows the rules from latte.
 
-![Latte Extension Demo](./figs/recording2.gif)
+
 
 
 ## Requirements
