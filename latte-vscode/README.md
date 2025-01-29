@@ -1,65 +1,92 @@
-# latte-vscode README
+# latte-vscode
+## VSCode extension for Latte - Lightweight Aliasing Tracking for Java
 
-This is the README for your extension "latte-vscode". After writing up a brief description, we recommend including the following sections.
+Use our Latte type checker to annotate your programs with permissions where aliases are tracked!
+
+Research Paper [details](https://arxiv.org/pdf/2309.05637).
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+This extension type checks files using Latte.
 
-For example if there is an image subfolder under your extension project workspace:
+Latte uses annotations to specify the permissions of fields and parameters to track their uniqueness properties and the aliases that are created throughout the program.
 
-\!\[feature X\]\(images/feature-x.png\)
+#### Quick introduction to Latte
+We have 4 annotations, some for parameters, others for fields. Local variables are not annotated.
+- For parameters:
+  - `@Free` for parameters that are globally unique. When a caller passes an argument to a `@Free` parameter they cannot observe that value again.
+  - `@Borrowed` for parameters that are unique in the callee's scope but may be stored elsewhere on the heap or stack
+- For fields:
+  - `@Unique` for fields that cannot be aliased with other fields.
+- For both:
+  - `@Shared` for parameters or fields that can be shared, so they have no uniqueness 
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+
+#### Example
+Here is an example of Java classes using Latte.
+
+```java
+class Node {
+    @Unique Object value;   // Field value is Unique
+    @Unique Node next;      // Field next is Unique
+
+
+    public Node (@Free Object value, @Free Node next) {
+        // We can assign @Free objects to Unique fields given that they have no aliases
+        this.value = value; 
+        this.next = next;
+    }
+}
+
+public class MyStack {
+
+    @Unique Node root;          // Field root is Unique		
+    
+    public MyStack(@Free Node root) {
+        this.root = root;       // Since root is @Free we can assign it to root:@Unique		
+    }
+    
+    void push( @Free Object value) {	
+        Node r;                 // Local variables start with a default annotation that allows
+        Node n;                 // them to take the assignment's permissions
+        
+        r = this.root; 			// r is an alias to this.root with permission @Unique
+        this.root = null; 		// Nullify this.root so there is only one pointer to the 
+                                // value of the root, no other aliases
+        n = new Node(value, r); // Create new root with values that have no aliases. The constructors  
+                                // always return an new object that is @Free 
+        this.root = n; 			// Replace root with a new value that is @Free and so can be assigned 
+                                // to an @Unique field
+    }
+}
+```
+
+With this extension you can check in real time if your code follows the rules from latte.
+
+![Latte Extension Demo](./figs/recording2.gif)
+
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+To use Latte, your project should have the latte.jar in its dependencies and the files need to import the specifications (e.g., import specification.Free).
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The programs that can be verified using Latte are still simple, we are adding new features going forward.
+
+Known issues include:
+- Not supporting ifs without elses
+- Not verifying aliases related to while loops
+- ...
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
+Initial release of Latte
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
 
 ---
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**

@@ -74,7 +74,7 @@ function activate(context) {
         const diagnostics = errors.map(err => {
             const range = new vscode.Range(
                 new vscode.Position(err.startLine - 1, err.startColumn - 1),
-                new vscode.Position(err.endLine - 1, err.endColumn - 1)
+                new vscode.Position(err.endLine - 1, err.endColumn)
             );
 
             console.log("Short Message", err.shortMessage)
