@@ -3,6 +3,10 @@
   "displayName": "LatteExtension",
   "description": "Verify uniqueness in your java classes",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CatarinaGamboa/latte-vscode"
+  },
   "engines": {
     "vscode": "^1.96.0"
   },
