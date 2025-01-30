@@ -5,7 +5,7 @@
       "vscode": {
         "extensions": [
             "vscjava.vscode-java-pack", // Java Support (Red Hat)
-            "/workspaces/$(basename ${GITHUB_REPOSITORY})/latte-0.0.1.vsix"
+            "${containerWorkspaceFolder}/latte-0.0.2.vsix" // Latte Extension
         ]
       }
     },
