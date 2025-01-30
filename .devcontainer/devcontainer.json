@@ -4,10 +4,16 @@
     "customizations": {
       "vscode": {
         "extensions": [
-          "/workspaces/$(basename ${GITHUB_REPOSITORY})/.devcontainer/latte-0.0.1.vsix"
+            "vscjava.vscode-java-pack", // Java Support (Red Hat)
+            "/workspaces/$(basename ${GITHUB_REPOSITORY})/.devcontainer/latte-0.0.1.vsix"
         ]
       }
     },
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+          "version": "17" // Installs JDK 17 (Change if needed)
+        }
+      },
     "postCreateCommand": "code --install-extension .devcontainer/latte-vscode.vsix && npm install"
 }
   
