@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "examples"
+    ],
+    "java.project.referencedLibraries": [
+        "/Users/cgamboa/Desktop/test_latte/latte/latte.jar"
+    ]
+}
