@@ -97,47 +97,7 @@ function activate(context) {
                 console.log("No JSON found in stderr.");
             }
         });
-
-        // const path = require('path');
-        // // Replace this with the command to invoke your type checker
-        // const command = `java -jar "${path.join(__dirname, 'latte.jar')}" "${filePath}"`;
-
-        // console.log("Running type checker with command:", command);
-        // exec(command, (error, stdout, stderr) => {
-        //     if (error) {
-        //         console.error("Error executing type checker:", error.message);
-        //         // vscode.window.showErrorMessage(`Error running type checker: ${error.message}`);
-        //         return;
-        //     }
-
-        //     console.log("Type checker stdout:", stdout);
-        //     console.log("Type checker stderr:", stderr);
-
-        //     if(stderr === '') {
-        //         diagnosticCollection.delete(document.uri);
-        //         return;
-        //     }
-
-        //     // Use a regex to extract the JSON part
-        //     const jsonRegex = /{.*}/s; // Matches anything between curly braces, including newlines
-        //     const match = stderr.match(jsonRegex);
-        //     let errors = [];
-        //     if (match) {
-        //         try {
-        //             errors.push(JSON.parse(match[0])); // Parse the JSON string
-        //             console.log("Parsed JSON:", errors);
-        //             updateDiagnostics(document.uri, errors, diagnosticCollection);
-        //         } catch (error) {
-        //             console.error("Error parsing JSON:", error);
-        //             return;
-        //         }
-        //     } else {
-        //         diagnosticCollection.delete(document.uri);
-        //         console.log("No JSON found in stderr.");
-        //         return;
-        //     }
-        // });
-    }
+   }
 
     // Update diagnostics for a file
     function updateDiagnostics(fileUri, errors, diagnosticCollection) {
@@ -147,7 +107,6 @@ function activate(context) {
                 new vscode.Position(err.endLine - 1, err.endColumn)
             );
 
-            console.log("Short Message", err.shortMessage)
             let diag = new vscode.Diagnostic(
                 range,
                 err.message,
